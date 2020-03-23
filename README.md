@@ -11,11 +11,12 @@ You don't need to istall libraries and others dependencies.
 `lib/` - folder with libraries  
 `source/` - the hearth of simulation  
 
-## key features
+## Key features
 Access following keys in simualtion:  
 `e` - stop simulation  
 `s` - 100x generation proccess  
 `g` - force new generation  
 `q` - save best car to localStorage  
 `r` - restore neural network from localStorage  
-
+`←↓→` - control your camera position with arraw keys  
+`+/-` - zoom in / out our camera
