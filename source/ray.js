@@ -54,7 +54,6 @@ class Ray {
             for (let col_car of cars)
                 if (car !== col_car)
                     for (let i = 0; i < 4; i++) {
-                        debugger;
                         let x1 = col_car.pos.x + col_car.pospoints[i].x;
                         let y1 = col_car.pos.y + col_car.pospoints[i].y;
 
