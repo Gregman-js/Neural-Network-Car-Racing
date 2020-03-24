@@ -10,6 +10,8 @@ class Car {
         this.avspeed;
         this.sumspd = 0;
 
+        this.pospoints = new Array(4);
+
 
         this.ai = ai;
         this.score = 0;
@@ -19,15 +21,14 @@ class Car {
         this.rays;
         if (this.ai) {
             this.rays = [];
-            for (var i = -150; i <= -30; i += 30) {
+            for (var i = -160; i <= -20; i += 20) {
                 this.rays.push(new Ray(i));
             }
         }
         if (brain) {
             this.brain = brain.copy();
-            this.brain.mutate(mutate);
-        } else if(this.ai)
-            this.brain = new NeuralNetwork(this.rays.length, 5, 2);
+        } else if (this.ai)
+            this.brain = new NeuralNetwork(this.rays.length, this.rays.length, 2);
     }
 
     update() {
@@ -45,11 +46,17 @@ class Car {
             else if (keyIsDown(LEFT_ARROW) && (up || down))
                 this.angle -= (down ? -1 : 1) * this.speed * 2 / 3;
         } else {
-            
+            this.pospoints[0] = createVector(-this.w / 2, -this.h / 2).rotate(radians(this.angle + 90));
+            this.pospoints[1] = createVector(this.w / 2, -this.h / 2).rotate(radians(this.angle + 90));
+            this.pospoints[2] = createVector(this.w / 2, this.h / 2).rotate(radians(this.angle + 90));
+            this.pospoints[3] = createVector(-this.w / 2, this.h / 2).rotate(radians(this.angle + 90));
+
+
+
             var inputs = new Array(this.rays.length);
             for (let i = 0; i < this.rays.length; i++) {
                 var ray = this.rays[i];
-                
+
                 ray.update(this);
                 inputs[i] = ray.powdist;
             }
@@ -59,22 +66,21 @@ class Car {
             }
 
             var output = this.brain.predict(inputs);
-            
+
 
             // speed
-            this.currentspeed = output[1] * 7 + 2;//output[0] * 5 + 4;
-            // this.currentspeed = 5;
-            
-            
+            this.currentspeed = output[1] * 7 + 2;
+
+
             // angle
             var skr = (output[0] - 0.5) * 2;
             if (!isNaN(skr))
-            this.angle += skr * (20/this.currentspeed);
-            
+                this.angle += skr * (20 / this.currentspeed);
+
             // podliczanie sredniej
             this.sumspd += this.currentspeed;
             this.avspeed = this.sumspd / this.score;
-            this.score+= this.currentspeed;
+            this.score += this.currentspeed;
             this.maxspeed = max(this.maxspeed, this.currentspeed);
 
 
@@ -92,14 +98,17 @@ class Car {
         else
             stroke(255, 140, 0);
 
-        strokeWeight(3);
+        if (this.run)
+            strokeWeight(3);
+        else
+            strokeWeight(1);
         strokeJoin(ROUND);
         translate(this.pos.x, this.pos.y);
         rotate(radians(this.angle + 90));
         rect(0, 0, this.w, this.h);
         pop();
         push();
-        if (this.ai) {
+        if (this.ai && this.run) {
             strokeWeight(10);
             stroke('blue');
             for (let ray of this.rays) {
@@ -111,11 +120,10 @@ class Car {
 
     stop() {
         this.run = false;
-        this.score = this.score - this.score / this.maxspeed;
-        // this.score = this.score - this.score / this.avspeed;
+        this.score = this.score;
     }
 }
 
 //liczenie max
-//Math.max.apply(null, cars.filter(car => car.run == true).map(car => car.maxspeed))
+//Math.max(...cars.filter(car => car.run == true).map(car => car.maxspeed))
 //Math.max(...cars.filter(car => car.run == true).map(car => car.currentspeed))

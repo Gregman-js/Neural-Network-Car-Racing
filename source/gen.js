@@ -34,6 +34,7 @@ function pickBestCar(oldCars, net_to_restore) {
 
     let car = oldCars[index];
     let child = new Car(true, net_to_restore || car.brain);
+    child.brain.mutate(mutate);
     return child;
 }
 

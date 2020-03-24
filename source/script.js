@@ -3,6 +3,7 @@ var cars = [];
 var road;
 var running = true;
 const TOTAL_CAR = 100;
+var collide_with_cars = false;
 
 var campos;
 const camspeed = 10;
@@ -57,13 +58,13 @@ function draw() {
         road.show();
         let livecar = 0;
         for (let i = 0; i < TOTAL_CAR; i++) {
-            if (cars[i].run) {
-                cars[i].show();
+            cars[i].show();
+            if (cars[i].run)
                 livecar++;
-            }
         }
         if (livecar == 0) {
             // debugger;
+            collide_with_cars = false;
             nextGen();
         }
     }
@@ -87,6 +88,7 @@ function printInfo() {
     text("Gen: " + gen, 10, 60);
     text("Max speed: " + Math.max.apply(null, cars.filter(car => car.run == true).map(car => car.maxspeed)).toFixed(3), 10, 90);
     text("Curr. max speed: " + Math.max.apply(null, cars.filter(car => car.run == true).map(car => car.currentspeed)).toFixed(3), 10, 120);
+    text("Collide cars: " + collide_with_cars, 10, 150);
     pop();
 }
 
@@ -104,6 +106,7 @@ function keyPressed() {
         else
             genspeed = 1;
     } else if (key == 'g') {
+        collide_with_cars = false;
         nextGen();
     } else if (key == 'q') {
         var bestcar = cars.reduce((a, b) => a.currentspeed >= b.currentspeed ? a : b);
@@ -111,8 +114,10 @@ function keyPressed() {
         localStorage.setItem('genstate', gen);
     } else if (key == 'r') {
         restore_net = true;
-        if(a = localStorage.getItem('genstate'))
+        if (a = localStorage.getItem('genstate'))
             gen = a;
         nextGen();
+    } else if (key == 'c') {
+        collide_with_cars = !collide_with_cars;
     }
 }
