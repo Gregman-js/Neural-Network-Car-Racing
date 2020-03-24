@@ -18,5 +18,6 @@ Access following keys in simualtion:
 `g` - force new generation  
 `q` - save best car to localStorage  
 `r` - restore neural network from localStorage  
+`c` - turn on/off car collisions
 `←↓→` - control your camera position with arraw keys  
 `+/-` - zoom in / out our camera
