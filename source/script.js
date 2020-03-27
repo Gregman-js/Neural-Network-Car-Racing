@@ -1,3 +1,6 @@
+// Created by Gregman-js
+//https://github.com/Gregman-js
+
 var cars = [];
 
 var road;
