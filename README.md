@@ -2,8 +2,11 @@
 A small 2D simulation in which cars learn to drive by themselves using a neural network and genetics algorithms.  
 Created by [Gregman-js](https://github.com/Gregman-js)
 
+## Ready to use
+Just visit and enjoy learning. [gregman-js.github.io/Neural-Network-Car-Racing/](https://gregman-js.github.io/Neural-Network-Car-Racing/)
+
 ## No requirements and dependencies
-You don't need to istall libraries and others dependencies.
+You don't need to install libraries and others dependencies.
 
 ## Important files
 `index.html` - default page with car simulation  
