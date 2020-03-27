@@ -5,6 +5,8 @@ Created by [Gregman-js](https://github.com/Gregman-js)
 ## Ready to use
 Just visit and enjoy. [gregman-js.github.io/Neural-Network-Car-Racing/](https://gregman-js.github.io/Neural-Network-Car-Racing/)
 
+![preview](https://raw.githubusercontent.com/Gregman-js/Neural-Network-Car-Racing/master/preview.png)
+
 ## No requirements and dependencies
 You don't need to install libraries and others dependencies.
 
