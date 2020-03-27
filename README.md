@@ -21,3 +21,7 @@ Access following keys in simualtion:
 `c` - turn on/off car collisions  
 `←↓→` - control your camera position with arraw keys  
 `+/-` - zoom in / out our camera
+
+## Used library
+* p5.js - [https://github.com/processing/p5.js](https://github.com/processing/p5.js)
+* Toy-Neural-Network-JS - [https://github.com/CodingTrain/Toy-Neural-Network-JS](https://github.com/CodingTrain/Toy-Neural-Network-JS)
